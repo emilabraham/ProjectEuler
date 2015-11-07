@@ -17,5 +17,4 @@ def squareOfSum(number):
     number = number - 1
   return square * square
 
-print squareOfSum(10) - sumOfSquares(10)
 print squareOfSum(100) - sumOfSquares(100)

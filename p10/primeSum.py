@@ -12,7 +12,7 @@ def primeSum():
   for x in xrange(2, 2000000):
     if isPrime(x):
       answer.append(x)
-  print answer
+  #print answer
   return sum(answer)
 
 #Abstracts a level to avoid the divisor parameter.

@@ -33,8 +33,4 @@ def isPrimeHelper(number, divisor):
     return True
 
 
-for i in xrange(10):
-  print i
-print isPrime(47)
-print largestPrimeFactor(13195)
 print largestPrimeFactor(600851475143)
