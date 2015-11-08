@@ -32,7 +32,7 @@ def rowProduct(grid, size):
             product = 1
             #4 adjacent digits
             adjacentDigits= row[digit:digit+size]
-            print adjacentDigits
+            #print adjacentDigits
 
             #multiply the 4 digits
             for num in adjacentDigits:
@@ -43,4 +43,90 @@ def rowProduct(grid, size):
                 maxProduct = product
     return maxProduct
 
-print rowProduct(grid, 4)
+#Takes in a grid and the number of adjacent digits you want to multiply
+#This one is going along just the columns
+#Returns the largest product found
+def columnProduct(grid, size):
+    maxProduct = 0
+    for row in range(0, len(grid) - size+1):
+        for column in range(0, len(grid[row])):
+            product = 1
+            adjacentDigits = []
+
+            #accumulate the adjacent columns into an array
+            for index in range(row, row+size):
+                adjacentDigits.append(grid[index][column])
+
+            #print adjacentDigits
+            for num in adjacentDigits:
+                product *= num
+
+            #Remember the biggest product
+            if product > maxProduct:
+                maxProduct = product
+    return maxProduct
+
+#Takes in a grid and the number of adjacent digits you want to multiply
+#This one is going along left to right diagonals
+#Returns the largest product found
+def diagonalLRProduct(grid, size):
+    maxProduct = 0
+    for row in range(0, len(grid) - size+1):
+        #The - size+1 is there to make sure we don't go out of bounds
+        for column in range(0, len(grid[row]) - size+1):
+            product = 1
+            adjacentDigits = []
+
+            #The column will increase by 1 every time we add a row
+            diagColumn = column
+
+            #Accumulate adjacent LR diagonals in an array
+            for index in range(row, row+size):
+                adjacentDigits.append(grid[index][diagColumn])
+
+                #Increment the column so that we move in a diagonal
+                diagColumn += 1
+
+            #print adjacentDigits
+            for num in adjacentDigits:
+                product *= num
+
+            #Remember the biggest product
+            if product > maxProduct:
+                maxProduct = product
+
+    return maxProduct
+
+
+#Takes in a grid and the number of adjacent digits you want to multiply
+#This one is going along right to left diagonals
+#Returns the largest product found
+def diagonalRLProduct(grid, size):
+    maxProduct = 0
+    for row in range(0, len(grid) - size+1):
+        #Needed a backwards range
+        for column in range(len(grid[row])-1, size-2, -1):
+            product = 1
+            adjacentDigits = []
+
+            #The column will increase by 1 every time we add a row
+            diagColumn = column
+
+            #Accumulate adjacent RL diagonals in an array
+            for index in range(row, row+size):
+                adjacentDigits.append(grid[index][diagColumn])
+
+                #Increment the column so that we move in a diagonal
+                diagColumn -= 1
+
+            for num in adjacentDigits:
+                product *= num
+
+            #Remember the biggest product
+            if product > maxProduct:
+                maxProduct = product
+
+    return maxProduct
+
+print max(rowProduct(grid, 4), columnProduct(grid, 4), diagonalLRProduct(grid, 4),
+        diagonalRLProduct(grid, 4))
