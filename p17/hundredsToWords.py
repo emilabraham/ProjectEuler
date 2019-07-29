@@ -1,3 +1,5 @@
+#Problem 17 from Project Euler
+#https://projecteuler.net/problem=17
 #Takes a 3 digit numbers and outputs the english representation
 
 ones = { 0: "", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7:
@@ -13,7 +15,9 @@ specialTens = { 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen", 15:
 def loop():
     conglomerate = ""
     for i in range(1,1000):
-        conglomerate += convertToWord(str(i))
+        converted = convertToWord(str(i))
+        print converted
+        conglomerate += converted
     return len(conglomerate + "onethousand")
 
 def convertToWord(number):
@@ -22,7 +26,7 @@ def convertToWord(number):
 #number : string
 # returns English representation of the hundreds place
 def hundredsWord(number):
-    if (int(number) > 100):
+    if (int(number) >= 100):
         return ones[int(number[0])] + "hundred"
     else:
         return ""
